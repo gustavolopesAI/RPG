@@ -9,7 +9,7 @@ ou seja, "Inicialize um atributo hp_
 com o valor do parâmetro hp" */ 
 
 std::string Entity::getName() const { return name_; }
-int Entity::getHP() const { return hp_; }
+int Entity::getHP() const { return hp_; } 
 bool Entity::isDead() const { return dead_; }
 int Entity::getInitiative() const { return initiative_; }
 

@@ -10,7 +10,6 @@ private:
     int hp_; // hp_ é um atributo
     bool dead_;
     int initiative_;
-    int 
 public:
     Entity(std::string name, int hp,int initiative);
 
@@ -31,7 +30,7 @@ public:
 class Player: public Entity{
 private:
     std::string characterClass_;
-    int xp_;w
+    int xp_;
     int equipamentsLimit_;
     std::vector<std::string> equipaments_;
     bool bonusReceived_;
