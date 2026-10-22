@@ -1,15 +1,5 @@
 <div align="center">
 
-# ⚔️ RPG em C++ — Programação Orientada a Objetos
-
-**Um mini-RPG de terminal feito para praticar os pilares da Programação Orientada a Objetos em C++.**
-
-![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange?style=for-the-badge)
-![UEL](https://img.shields.io/badge/UEL-Ci%C3%AAncia%20de%20Dados%20%26%20IA-1f6feb?style=for-the-badge)
-
-</div>
-
 ---
 
 ## 📖 Sobre o projeto
@@ -25,21 +15,32 @@ Hoje o programa:
 - 🎒 controla o **inventário**, com um limite de itens que depende da classe;
 - 🪪 imprime as **fichas dos personagens lado a lado** no terminal.
 
+Inspiração em DIABLO III
+
+Boss Azmodan, o senhor do pecado 
+
+![ArtStation - Diablo 3 Azmodan](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdna.artstation.com%2Fp%2Fassets%2Fimages%2Fimages%2F000%2F169%2F172%2Flarge%2Fanthony-rivero-azmodanportfolio-01.jpg%3F1408150142&f=1&nofb=1&ipt=69c8d1d599111f51c56e52225f2ba0dfc73e62cecfd41e968bda7bcaa895c428&ipo=images)
+
+Assistente Tyrael, o arcanjo da justiça
+
+![Tyrael from Diablo III - Epic HD Wallpaper](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages7.alphacoders.com%2F410%2F410225.jpg&f=1&nofb=1&ipt=dd5c2dfa42b4afdfa43f844029994e230a0a4a48d44d54c622348acb4515e0c3&ipo=images)
+
+
 ---
 
 ## 🧠 Conceitos de POO aplicados
 
-| Conceito | Onde aparece |
-|---|---|
-| **Encapsulamento** | Atributos `private` (`name_`, `hp_`, `xp_`…), acessados apenas por *getters* |
-| **Herança** | `Player`, `Monster` e `Assistant` herdam de `Entity`; `Boss` e `Minion` herdam de `Monster` |
-| **Classe abstrata** | `Entity` tem o método virtual puro `act(int currentTurn) = 0` |
-| **Polimorfismo** | `act()` e `card()` são `virtual` e sobrescritos (`override`) nas classes filhas; o `main` trata todos como `Entity*` |
-| **Destrutor virtual** | `virtual ~Entity()` garante que objetos derivados sejam liberados corretamente |
-| **Sobrecarga de operadores** | `operator<` compara entidades pela iniciativa; `operator<<` imprime uma entidade com `std::cout` |
-| **Função `friend`** | `operator<<` acessa os atributos privados de `Entity` |
-| **Lista de inicialização** | Os construtores inicializam os atributos com `: name_(name), hp_(hp), ...` |
-| **Funções `static` de arquivo** | `row()` e `text()` em `player.cpp` formatam as linhas da ficha e só existem naquele arquivo |
+| Conceito                                  | Onde aparece                                                                                                                      |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Encapsulamento**                  | Atributos `private` (`name_`, `hp_`, `xp_`…), acessados apenas por *getters*                                           |
+| **Herança**                        | `Player`, `Monster` e `Assistant` herdam de `Entity`; `Boss` e `Minion` herdam de `Monster`                         |
+| **Classe abstrata**                 | `Entity` tem o método virtual puro `act(int currentTurn) = 0`                                                                |
+| **Polimorfismo**                    | `act()` e `card()` são `virtual` e sobrescritos (`override`) nas classes filhas; o `main` trata todos como `Entity*` |
+| **Destrutor virtual**               | `virtual ~Entity()` garante que objetos derivados sejam liberados corretamente                                                  |
+| **Sobrecarga de operadores**        | `operator<` compara entidades pela iniciativa; `operator<<` imprime uma entidade com `std::cout`                            |
+| **Função `friend`**             | `operator<<` acessa os atributos privados de `Entity`                                                                         |
+| **Lista de inicialização**        | Os construtores inicializam os atributos com `: name_(name), hp_(hp), ...`                                                      |
+| **Funções `static` de arquivo** | `row()` e `text()` em `player.cpp` formatam as linhas da ficha e só existem naquele arquivo                                |
 
 ---
 
@@ -105,19 +106,19 @@ classDiagram
 
 ### Classes (valores base)
 
-| Classe | FOR | DES | CON | SAB | INT | CAR | Limite de itens |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 🛡️ **Crusader** | 14 | 10 | 14 | 12 | 8 | 14 | 7 |
-| 🪓 **Barbarian** | 16 | 12 | 15 | 10 | 8 | 8 | 5 |
-| 💀 **Necromancer** | 8 | 12 | 10 | 13 | 16 | 10 | 3 |
+| Classe                   | FOR | DES | CON | SAB | INT | CAR | Limite de itens |
+| ------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-------------: |
+| 🛡️ **Crusader**  | 14 | 10 | 14 | 12 |  8  | 14 |        7        |
+| 🪓 **Barbarian**   | 16 | 12 | 15 | 10 |  8  |  8  |        5        |
+| 💀 **Necromancer** |  8  | 12 | 10 | 13 | 16 | 10 |        3        |
 
 ### Raças (bônus somado à classe)
 
-| Raça | Bônus |
-|---|---|
-| 🧑 **Human** | +1 em todos os atributos |
-| ⛏️ **Dwarf** | +2 Constituição, +1 Força |
-| 🧝 **Elf** | +2 Destreza, +1 Inteligência |
+| Raça                | Bônus                        |
+| -------------------- | ----------------------------- |
+| 🧑 **Human**   | +1 em todos os atributos      |
+| ⛏️ **Dwarf** | +2 Constituição, +1 Força  |
+| 🧝 **Elf**     | +2 Destreza, +1 Inteligência |
 
 > Todo personagem começa com uma `Healing_potion` no inventário, que já conta para o limite de itens.
 > No **turno 1**, cada jogador vivo recebe um bônus único de **+100 XP**.
@@ -187,9 +188,9 @@ Morgana: Healing_potion Staff Grimoire
 
 ## 🗺️ Próximos passos
 
-- [x] Classe base `Entity` com vida, dano e iniciativa
-- [x] `Player` com classes, raças, atributos e inventário
-- [x] Fichas dos personagens impressas lado a lado
+- [X] Classe base `Entity` com vida, dano e iniciativa
+- [X] `Player` com classes, raças, atributos e inventário
+- [X] Fichas dos personagens impressas lado a lado
 - [ ] Implementar `Monster`, `Boss` e `Minion` (`enemies.cpp`)
 - [ ] Implementar o `Assistant`, que entra em combate em um turno definido
 - [ ] Sistema de **loot** e distribuição de XP ao derrotar monstros
@@ -214,14 +215,6 @@ Morgana: Healing_potion Staff Grimoire
 </table>
 
 <div align="center">
-
-[![Portfólio](https://img.shields.io/badge/Portf%C3%B3lio-gustavolopesai.github.io-0A66C2?style=for-the-badge&logo=githubpages&logoColor=white)](https://gustavolopesai.github.io)
-[![GitHub](https://img.shields.io/badge/GitHub-gustavolopesAI-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gustavolopesAI)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gustavo%20Lopes%20Silva-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gustavo-lopes-silva-londrina)
-[![Lattes](https://img.shields.io/badge/Curr%C3%ADculo-Lattes%20CNPq-2E7D32?style=for-the-badge)](http://lattes.cnpq.br/3442293046870208)
-[![Email](https://img.shields.io/badge/Email-gustavolopessilva0608%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:gustavolopessilva0608@gmail.com)
-
-</div>
 
 ---
 

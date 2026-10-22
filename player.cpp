@@ -4,6 +4,7 @@
 Player::Player(std::string name, std::string characterClass, int hp, int initiative)
     : Entity(name, hp, initiative), characterClass_(characterClass), xp_(0), equipamentsLimit_(3), bonusReceived_(false)
 {
+    if (name_ == "Diablo")
     if(characterClass_ == "Crusader" )
         equipamentsLimit_ = 7;
     else if (characterClass_ == "Barbarian")
