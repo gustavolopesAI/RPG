@@ -54,6 +54,7 @@ public:
     Monster(std::string name,std::string loot, int hp, int initiative, int quantity, int concedXP);
 
     std::string getLoot() const;
+    int getQuantity() const;
     int getConcedXP() const;
 };
 
@@ -65,7 +66,7 @@ public:
 
 class Minion: public Monster {
 public:
-    Minion(std::string name, std::string loot,int initiative, int hp, int quantity,int concedXP);
+    Minion(std::string name, std::string loot,int hp, int initiative, int quantity,int concedXP);
     void act(int currentTurn) override;
 };
 
