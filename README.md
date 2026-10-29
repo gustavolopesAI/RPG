@@ -191,7 +191,7 @@ Morgana: Healing_potion Staff Grimoire
 - [X] Classe base `Entity` com vida, dano e iniciativa
 - [X] `Player` com classes, raças, atributos e inventário
 - [X] Fichas dos personagens impressas lado a lado
-- [ ] Implementar `Monster`, `Boss` e `Minion` (`enemies.cpp`)
+- [X-] Implementar `Monster`, `Boss` e `Minion` (`enemies.cpp`)
 - [ ] Implementar o `Assistant`, que entra em combate em um turno definido
 - [ ] Sistema de **loot** e distribuição de XP ao derrotar monstros
 - [ ] Loop de combate por turnos, ordenado por iniciativa (`operator<`)
