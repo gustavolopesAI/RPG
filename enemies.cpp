@@ -15,24 +15,29 @@ int Monster::getConcedXP() const {return concedXP_;}
 Boss::Boss(std::string name, std::string loot, int hp,int initiative, int quantity, int concedXP)
    : Monster(name, loot, hp, initiative, quantity, concedXP){
 
-   }
+}
 
 void Boss::act(int currentTurn){
     if(isDead()) return;
     if (currentTurn >= 1 ){
-        do something?
+        if (currentTurn % 3 == 0 ){ // A cada 3 turnos o Boss usa um ataque especial 
+            std::cout << getName() << " usa um ATAQUE ESPECIAL no turno " << currentTurn << "!" << std::endl;
+        }else{
+            std::cout << getName() << " ataca no turno " << currentTurn << std::endl;
+
+        }
     }
 }
 
 //Minion 
-Minion::Minion Minion(std::string name, std::string loot,int hp, int initiative, int quantity,int concedXP)
-    :Monster(std::string name,std::string loot, int hp, int initiative, int quantity, int concedXP){
+Minion::Minion(std::string name, std::string loot,int hp, int initiative, int quantity,int concedXP)
+    :Monster(name, loot, hp, initiative, quantity, concedXP){
     
 }
 
 void Minion::act(int currentTurn){
     if(isDead()) return;
     if (currentTurn >= 1 ){
-        do something?
+        std::cout << getName() << " da um ataque fraco no turno " << currentTurn << std::endl;
     }
 }

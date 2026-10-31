@@ -1,5 +1,6 @@
 #include "mainRPG.h"
 #include <vector>
+#include <algorithm>
 
 int main(){
 

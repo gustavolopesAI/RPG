@@ -3,13 +3,23 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <random>
 
+class Dice{
+private:
+    std::mt19937 generator_;
+public:
+    Dice();
+    int roll(int faces);               // 1 dado: roll(20) = 1d20
+    int roll(int quantity, int faces); // sobrecarga: roll(2, 6) = 2d6
+}
 class Entity{
 private:
     std::string name_;
     int hp_; // hp_ é um atributo
     bool dead_;
     int initiative_;
+    int turnInitiative_; //iniciativa sorteada no turno atual 
 public:
     Entity(std::string name, int hp,int initiative);
 
@@ -24,7 +34,8 @@ public:
     virtual void act(int currentTurn) = 0;
     bool operator<(const Entity& other) const;
     friend std::ostream& operator<<(std::ostream& out, const Entity& entity);
-
+    void rollInitiative(Dice& dice);
+    int getTurnIniative() const;
 };
 
 class Player: public Entity{

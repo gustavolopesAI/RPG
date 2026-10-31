@@ -2,7 +2,7 @@
 #include <iostream>
 
 Entity::Entity(std::string name, int hp, int initiative)
-    : name_(name), hp_(hp), dead_(false), initiative_(initiative) {} 
+    : name_(name), hp_(hp), dead_(false), initiative_(initiative), turnInitiative_(initiative) {} 
 
     /* hp_(hp) hp_ é um atributo e hp é um parâmetro
 ou seja, "Inicialize um atributo hp_ 
@@ -20,6 +20,8 @@ void Entity::takeDamage(int quantity) {
         hp_ = 0;
         dead_ = true;
     }
+void Entity::rollInitiative(Dice& dice){turnInitiative_ = initiative_ + dice.roll(20); }
+int Entity::getTurnInitiative() const {return turnInitiative_; }
 }
 
 bool Entity::operator<(const Entity& other) const {return initiative_ < other.initiative_;}
