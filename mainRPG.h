@@ -104,4 +104,31 @@ public:
     void  showResume() const;
 };
 
+std::vector<std::string> readXML(std::string fileName, std::string tag);
+std::string drawName(std::vector<std::string>& names, Dice& dice, std::string fallback);
+
+class Simulation {
+private:
+    Dice dice_;
+    Turn turn_;
+    std::vector<Entity*> all_; // todos os personagens do combate
+    std::vector<Player*> players_; // so os jogadores
+    std::vector<std::string> playerNames_;
+    std::vector<std::string> bossNames_;
+    std::vector<std::string> assistantNames_;
+    int minionCount_;
+
+    Player* createPlayer(int classIndex);
+    Minion* createRandomMinion();
+    void createPlayers();
+    void createMonsters();
+    void printCards() const;
+    bool aPlayerDied() const;
+    void playTurn();
+public:
+    Simulation(std::string xmlFile);
+    ~Simulation();
+    void run();
+}
+
 #endif //MAINRPG_H
