@@ -12,7 +12,8 @@ public:
     Dice();
     int roll(int faces);               // 1 dado: roll(20) = 1d20
     int roll(int quantity, int faces); // sobrecarga: roll(2, 6) = 2d6
-}
+};
+
 class Entity{
 private:
     std::string name_;
@@ -22,13 +23,13 @@ private:
     int turnInitiative_; //iniciativa sorteada no turno atual 
 public:
     Entity(std::string name, int hp,int initiative);
-
     virtual ~Entity() {}
 
     std::string getName() const;
     int getHP() const;
     bool isDead() const;
     int getInitiative() const;
+    int getTurnInitiative() const;
 
     void takeDamage(int quantity);
     virtual void act(int currentTurn) = 0;
@@ -55,6 +56,7 @@ public:
     void act(int currentTurn)override;
     
 };
+int main(
 
 class Monster: public Entity{
 private:

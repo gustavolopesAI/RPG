@@ -1,23 +1,29 @@
 #include "mainRPG.h"
-#include <vector>
-#include <algorithm>
 
 int main(){
-
-    std::vector<Entity*> encounter;
-
-    encounter.push_back(new Player("Arthur", "Crusader", 100, 15));
-    encounter.push_back(new Player("Ragnar", "Barbarian", 120, 10));
-    encounter.push_back(new Player("Morgana", "Necromancer", 70, 12));
+    Dice dice;
+    std::vector<Entity*> characters = createCharacters("names.xml", dice); // inicialize vetor de personagens
+    printStats(characters);                                                // print stats dos personagens
+    Turn turn;                                                             // inicialize contador de turno  
     
-    // Impressao dos atributos
-    for (Entity * e : encounter){
-        std::cout << *e << "\n";
-    }
+    do{
+        turn.registerTurn();                                  // conta turno
+        addNewCharacters(turn.getNumber(), characters, dice); // monstros a cada 2 turnos / assistente no 5
+        sortByInitiative(characters, dice);                   // ordene por iniciativa
 
-    // Liberar a memoria
-    for (Entity * e : encounter) delete e;
+        for (Entity* c : characters) {                  // for each personagem
+            c->act(turn.getNumber(), characters, dice); // print acao + atualizar personagens
+            if (playerEliminated(characters)) break;
+        }
+        turn.showResume(characters);             // estado de cada personagem no fim do turno
+    } while (!playerEliminated(characters));     // while nao condicao
+
+    std::cout << "\n===== FIM DA SIMULACAO NO TURNO " << turn.getNumber() << " =====\n";
+    printStats(characters);
+    for (Entity* c : characters) delete c;
     return 0;
-
 }
+
+
+
 

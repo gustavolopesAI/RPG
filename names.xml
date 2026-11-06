@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<names>
+    <player>Arthur</player>
+    <player>Ragnar</player>
+    <player>Morgana</player>
+    <player>Lyra</player>
+    <player>Cain</player>
+    <player>Leah</player>
+    <player>Valla</player>
+    <player>Kharazim</player>
+
+    <boss>Azmodan</boss>
+    <boss>Diablo</boss>
+    <boss>Belial</boss>
+
+    <assistant>Tyrael</assistant>
+    <assistant>Auriel</assistant>
+</names>

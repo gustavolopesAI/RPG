@@ -20,11 +20,11 @@ void Entity::takeDamage(int quantity) {
         hp_ = 0;
         dead_ = true;
     }
-void Entity::rollInitiative(Dice& dice){turnInitiative_ = initiative_ + dice.roll(20); }
-int Entity::getTurnInitiative() const {return turnInitiative_; }
 }
 
-bool Entity::operator<(const Entity& other) const {return initiative_ < other.initiative_;}
+void Entity::rollInitiative(Dice& dice){turnInitiative_ = initiative_ + dice.roll(20); }
+int Entity::getTurnInitiative() const {return turnInitiative_; }
+bool Entity::operator<(const Entity& other) const {return turnInitiative_ < other.initiative_;}
 
    /* operator< (o nome especial que define o comportamento de <)
    
