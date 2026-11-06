@@ -17,9 +17,11 @@ Boss::Boss(std::string name, std::string loot, int hp,int initiative, int quanti
 
 }
 
-void Boss::act(int currentTurn){
+void Boss::act(int currentTurn, std::vector<Entity*>& all, Dice& dice){
     if(isDead()) return;
-    if (currentTurn >= 1 ){
+
+    // ESPECIAL: a cada 3 turnos ataca todos os herois
+    if (currentTurn % 3 == 0){
         if (currentTurn % 3 == 0 ){ // A cada 3 turnos o Boss usa um ataque especial 
             std::cout << getName() << " usa um ATAQUE ESPECIAL no turno " << currentTurn << "!" << std::endl;
         }else{

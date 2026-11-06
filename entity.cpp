@@ -34,12 +34,32 @@ bool Entity::operator<(const Entity& other) const {return turnInitiative_ < othe
    
    const no final (Diz que a função não altera o objeto do lado esquerdo (this))
 
-   initiative_  <  other.initiative_ (Uma entidade é menor que outra se tiver
-   iniciativa menor)
    */
 
 std::ostream& operator<<(std::ostream& out, const Entity& entity) {
     out << entity.name_ << " (HP: " << entity.hp_
         << ", Iniciativa: " << entity.initiative_ << ")";
     return out;
+}
+
+//Sorteia um jogador vivo da lista
+Player* randomAlivePlayer(std::vector<Entity*>& all, Dice& dice){
+    std::vector<Player*> alive;
+    for (Entity* e : all) {
+        Player* p = dynamic_cast<Player*>(e); // vira nullptr se 'e' nao for Player
+        if (p != nullptr && !p->isDead()) alive.push_back(p);
+    }
+    if (alive.empty()) return nullptr;
+    return alive[dice.roll((int)alive.size()) - 1];
+}
+
+//Sorteia um monstro vivo da lista 
+Monster* randomAliveMonster(std::vector<Entity*>& all, Dice& dice) {
+    std::vector<Monster*> alive;
+    for (Entity* e : all) {
+        Monster* m = dynamic_cast<Monster*>(e);
+        if (m != nullptr && !m->isDead()) alive.push_back(m);
+    }
+    if (alive.empty()) return nullptr;
+    return alive[dice.roll((int)alive.size()) - 1];
 }

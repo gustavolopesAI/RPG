@@ -32,31 +32,38 @@ public:
     int getTurnInitiative() const;
 
     void takeDamage(int quantity);
-    virtual void act(int currentTurn) = 0;
-    bool operator<(const Entity& other) const;
-    friend std::ostream& operator<<(std::ostream& out, const Entity& entity);
     void rollInitiative(Dice& dice);
-    int getTurnIniative() const;
+    virtual void act(int currentTurn, std::vector<Entity*>* all, Dice& dice) = 0;
+    
+    bool operator<(const Entity* other) const;
+    friend std::ostream& operator<<(std::ostream& out, const Entity& entity);
 };
 
 class Player: public Entity{
 private:
     std::string characterClass_;
+    std::string race_;
     int xp_;
     int equipamentsLimit_;
     std::vector<std::string> equipaments_;
     bool bonusReceived_;
+    int strength_;
+    int dexterity_;
+    int constitution_;
+    int wisdows_;
+    int intelligence_;
+    int charisma_;
 public:
-    Player(std::string name, std::string characterClass, int hp, int initiative);
+    Player(std::string name, std::string characterClass, std::string race, int hp, int initiative);
 
-    std::string getCharacterClass() const;    
+    std::string getCharacterClass() const;  
+    std::string getRace() const;  
     int getXP() const;   
     bool equipItens(std::string itemName);
     void gainXP(int quantity);
-    void act(int currentTurn)override;
-    
+    std::vector<std::string> card() const;
+    void act(int currentTurn, std::vector<Entity*>& all, Dice& dice) override;   
 };
-int main(
 
 class Monster: public Entity{
 private:
@@ -74,61 +81,51 @@ public:
 class Boss: public Monster {
 public:
     Boss(std::string name, std::string loot, int hp,int initiative, int quantity, int concedXP);
-    void act(int currentTurn) override;
+    void act(int currentTurn, std::vector<Entity*>& all, Dice& dice) override;
 };
 
 class Minion: public Monster {
 public:
     Minion(std::string name, std::string loot,int hp, int initiative, int quantity,int concedXP);
-    void act(int currentTurn) override;
+    void act(int currentTurn, std::vector<Entity*>& all, Dice& dice) override;
 };
 
 class Assistant: public Entity{
 private:
-    int appearanceTurn;
-    bool alreadyAppeared;
+    bool alreadyAppeared_;
 public:
-    Assistant(std::string name, int hp,int initiative, int appearanceTurn);
-
-    bool canAct(int currentTurn) const;
-
-    void act(int currentTurn) override;
+    Assistant(std::string name, int hp,int initiative);
+    void act(int currentTurn, std::vector<Entity*>& all, Dice& dice) override;
 };
+
 class Turn {
 private:
-    int turnNumber;
-
+    int turnNumber_;
 public:
-    Turn(int turnNumber);
+    Turn();
+    int getNumber() const;
     void  registerTurn();
-    void  showResume() const;
+    void  showResume(const std::vector<Entity*>& all) const;
 };
 
+// Sorteio de alvos(entity.cpp) e loot(loot.cpp)
+Player* randomAlivePlayer(std::vector<Entity*>& all, Dice& dice);
+Monster* randomAliveMonster(std::vector<Entity*>& all, Dice& dice);
+void distributeLoot(Monster* monster, Player* killer, std::vector<Entity*>& all);
+
+
+// Leitura do XML (xmlreader.cpp)
 std::vector<std::string> readXML(std::string fileName, std::string tag);
 std::string drawName(std::vector<std::string>& names, Dice& dice, std::string fallback);
 
-class Simulation {
-private:
-    Dice dice_;
-    Turn turn_;
-    std::vector<Entity*> all_; // todos os personagens do combate
-    std::vector<Player*> players_; // so os jogadores
-    std::vector<std::string> playerNames_;
-    std::vector<std::string> bossNames_;
-    std::vector<std::string> assistantNames_;
-    int minionCount_;
 
-    Player* createPlayer(int classIndex);
-    Minion* createRandomMinion();
-    void createPlayers();
-    void createMonsters();
-    void printCards() const;
-    bool aPlayerDied() const;
-    void playTurn();
-public:
-    Simulation(std::string xmlFile);
-    ~Simulation();
-    void run();
-}
+
+// Funcoes usadas pelo (game.cpp)
+std::vector<Entity*> createCharacters(std::string xmlFile, Dice& dice);
+void printStats(const std::vector<Entity*>& characters);
+void addNewCharacters(int currentTurn, std::vector<Entity*>& characters, Dice& dice);
+void sortByInitiative(std::vector<Entity*>& characters, Dice& dice);
+bool playerEliminated(const std::vector<Entity*>& characters);
+
 
 #endif //MAINRPG_H

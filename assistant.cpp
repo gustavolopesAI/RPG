@@ -31,4 +31,14 @@ if (dice.roll(2) == 1){
     if (target == nullptr) return;
     int damage = dice.roll(2,8);
     target->takeDamage(damage);
+    std::cout << "Assistant: " << getName() << " usa 'Espada do Julgamento' em "
+            << target->getName() << " e causa " << damage << " de dano.\n";
+    if (target->isDead()) {
+        std::cout << "Foe: " << target->getName() << " foi eliminado.\n";
+        distributeLoot(target, nullptr, all);
+    }
+    else {
+        std::cout << "Assistant: " << getName() << " observa a batalha.\n";
+    }
+    
 }
