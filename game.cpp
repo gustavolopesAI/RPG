@@ -31,7 +31,7 @@ static Minion* createRandomMinion(Dice& dice){
 
     int t = dice.roll(3) - 1;
     count++;
-    return new Minion(names[t] + " " + std::to_string(count), loots[t], hps[t], initiatives[t], 1, xps[t]);
+    return new Minion(names[t] + " " + std::to_string(count), loot[t], hps[t], initiatives[t], 1, xps[t]);
 }
 
 // "inicialize vetor de personagens": jogadores, Boss e minios aleatorios

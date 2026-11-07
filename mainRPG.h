@@ -33,9 +33,9 @@ public:
 
     void takeDamage(int quantity);
     void rollInitiative(Dice& dice);
-    virtual void act(int currentTurn, std::vector<Entity*>* all, Dice& dice) = 0;
+    virtual void act(int currentTurn, std::vector<Entity*>& all, Dice& dice) = 0;
     
-    bool operator<(const Entity* other) const;
+    bool operator<(const Entity& other) const;
     friend std::ostream& operator<<(std::ostream& out, const Entity& entity);
 };
 
@@ -50,7 +50,7 @@ private:
     int strength_;
     int dexterity_;
     int constitution_;
-    int wisdows_;
+    int wisdom_;
     int intelligence_;
     int charisma_;
 public:

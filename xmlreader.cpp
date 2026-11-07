@@ -18,7 +18,7 @@ std::vector<std::string> readXML(std::string fileName, std::string tag){
     std::string text = buffer.str();
 
     std::string open = "<" + tag + ">";
-    std::string close = "</" + tag ">";
+    std::string close = "</" + tag + ">";
 
     size_t start = text.find(open);
     while (start != std::string::npos) {

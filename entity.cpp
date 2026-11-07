@@ -24,17 +24,17 @@ void Entity::takeDamage(int quantity) {
 
 void Entity::rollInitiative(Dice& dice){turnInitiative_ = initiative_ + dice.roll(20); }
 int Entity::getTurnInitiative() const {return turnInitiative_; }
-bool Entity::operator<(const Entity& other) const {return turnInitiative_ < other.initiative_;}
+bool Entity::operator<(const Entity& other) const {return turnInitiative_ < other.turnInitiative_;}
 
-   /* operator< (o nome especial que define o comportamento de <)
-   
-   const Entity& other (o objeto do lado direito de <.
-   Ele é passado por referência & para não fazer cópia,
-   e é const para não ser alterado)
-   
-   const no final (Diz que a função não altera o objeto do lado esquerdo (this))
+/* operator< (o nome especial que define o comportamento de <)
 
-   */
+const Entity& other (o objeto do lado direito de <.
+Ele é passado por referência & para não fazer cópia,
+e é const para não ser alterado)
+
+const no final (Diz que a função não altera o objeto do lado esquerdo (this))
+
+*/
 
 std::ostream& operator<<(std::ostream& out, const Entity& entity) {
     out << entity.name_ << " (HP: " << entity.hp_
