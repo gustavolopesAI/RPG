@@ -8,7 +8,9 @@ static Player* createPlayer (int classIndex, std::vector<std::string>& names, Di
     int hps[3] = {100, 120, 70};
     int initiatives[3] = {15, 10, 12};
 
-    std::string name = drawName(names , dice, "Heroi");
+    static int count = 0; // numera os herois caso o XML nao seja encontrado
+    count++;
+    std::string name = drawName(names , dice, "Heroi " + std::to_string(count));
     std::string race = races[dice.roll(3) - 1];
     Player* p = new Player(name, classes[classIndex], race, hps[classIndex], initiatives[classIndex]);
 

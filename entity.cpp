@@ -9,6 +9,7 @@ ou seja, "Inicialize um atributo hp_
 com o valor do parâmetro hp" */ 
 
 std::string Entity::getName() const { return name_; }
+std::string Entity::getTitle() const { return name_; }
 int Entity::getHP() const { return hp_; } 
 bool Entity::isDead() const { return dead_; }
 int Entity::getInitiative() const { return initiative_; }
@@ -37,8 +38,8 @@ const no final (Diz que a função não altera o objeto do lado esquerdo (this))
 */
 
 std::ostream& operator<<(std::ostream& out, const Entity& entity) {
-    out << entity.name_ << " (HP: " << entity.hp_
-        << ", Iniciativa: " << entity.initiative_ << ")";
+    out << entity.getTitle() << " (HP: " << entity.hp_
+        << ", Iniciativa: " << entity.turnInitiative_ << ")";
     return out;
 }
 

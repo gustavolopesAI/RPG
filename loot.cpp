@@ -20,7 +20,7 @@ void distributeLoot(Monster* monster, Player* killer, std::vector<Entity*>& all)
         }
 
         if (receiver != nullptr)
-            std::cout << "Loot: " << receiver->getName() << " recebe " << item << ".\n";
+            std::cout << "Loot: " << receiver->getTitle() << " recebe " << item << ".\n";
         else
             std::cout << "Loot: ninguem tem espaco para " << item << ", o item foi perdido.\n";
     }

@@ -26,6 +26,7 @@ public:
     virtual ~Entity() {}
 
     std::string getName() const;
+    virtual std::string getTitle() const; // nome + o que ele e, ex: "Arthur (Crusader)"
     int getHP() const;
     bool isDead() const;
     int getInitiative() const;
@@ -57,7 +58,8 @@ public:
     Player(std::string name, std::string characterClass, std::string race, int hp, int initiative);
 
     std::string getCharacterClass() const;  
-    std::string getRace() const;  
+    std::string getRace() const;
+    std::string getTitle() const override;
     int getXP() const;   
     bool equipItens(std::string itemName);
     void gainXP(int quantity);
@@ -81,6 +83,7 @@ public:
 class Boss: public Monster {
 public:
     Boss(std::string name, std::string loot, int hp,int initiative, int quantity, int concedXP);
+    std::string getTitle() const override;
     void act(int currentTurn, std::vector<Entity*>& all, Dice& dice) override;
 };
 

@@ -51,6 +51,7 @@ Player::Player(std::string name, std::string characterClass, std::string race, i
 
 std::string Player::getCharacterClass() const { return characterClass_; }
 std::string Player::getRace() const { return race_; }
+std::string Player::getTitle() const { return getName() + " (" + characterClass_ + ")"; }
 int Player::getXP() const { return xp_; }
 
 bool Player::equipItens(std::string itemName) {
@@ -72,14 +73,14 @@ void Player::act(int currentTurn, std::vector<Entity*>& all, Dice& dice) {
         bonusReceived_ = true;
     }
 
-    std::string who = "Char: " + getName() + " (" + characterClass_ + ")";
+    std::string who = "Char: " + getTitle();
 
     Monster* target = randomAliveMonster(all, dice);
     if (target == nullptr) return;
 
     // ATAQUE: d20 menor que 6 erra
     if (dice.roll(20) < 6) {
-        std::cout << who << " ataca " << target->getName() << " mas falha.\n";
+        std::cout << who << " ataca " << target->getTitle() << " mas falha.\n";
         return;
     }
 
@@ -92,25 +93,25 @@ void Player::act(int currentTurn, std::vector<Entity*>& all, Dice& dice) {
     if (dice.roll(100) <= 25) {
         if (characterClass_ == "Crusader") {
             damage += 4;
-            std::cout << who << " usa 'Golpe Sagrado' em " << target->getName()
+            std::cout << who << " usa 'Golpe Sagrado' em " << target->getTitle()
                     << " e causa " << damage << " de dano.\n";
         } else if (characterClass_ == "Barbarian") {
             damage *= 2;
-            std::cout << who << " usa 'Furia' em " << target->getName()
+            std::cout << who << " usa 'Furia' em " << target->getTitle()
                     << " e causa " << damage << " de dano.\n";
         } else {
             damage += 5;
-            std::cout << who << " usa 'Maldicao' em " << target->getName()
+            std::cout << who << " usa 'Maldicao' em " << target->getTitle()
                     << " e causa " << damage << " de dano.\n";
         }
     } else {
-        std::cout << who << " ataca " << target->getName() << " e causa " << damage << " de dano.\n";
+        std::cout << who << " ataca " << target->getTitle() << " e causa " << damage << " de dano.\n";
     }
 
     target->takeDamage(damage);
 
     if (target->isDead()) {
-        std::cout << "Foe: " << target->getName() << " foi eliminado.\n";
+        std::cout << "Foe: " << target->getTitle() << " foi eliminado.\n";
         gainXP(target->getConcedXP());
         distributeLoot(target, this, all);
     }
